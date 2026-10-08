@@ -1,9 +1,16 @@
-import example.pepita
+import remiseria.*
 
-describe "group of tests for pepita" {
+describe "group of tests for remises" {
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
-  }
+test "torino"{
+   const torinoNegro = new Torino()
+  torinoNegro.color("negro")
+  assert.that(torinoNegro.color() == "negro")
+}
+
+test "economico" {
+  const economicoAD = new Economico()
+  assert.equals(economicoAD.adaptaciones(), {0})
+}
 
 }
