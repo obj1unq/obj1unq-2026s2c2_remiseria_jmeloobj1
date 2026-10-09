@@ -3,8 +3,8 @@ class Torino{
  const property transportaSillaDeRuedas = false
  const property motorEsRuidoso = true
  var property color = "color"  
- var property vMax = 120 + "km/h"
- var property autonomia =  200 + "km"
+ var property vMax = 120 
+ var property autonomia =  200 
 
 }
 
@@ -13,12 +13,16 @@ var property capacidad = self.capacidadTotal()
 var property transportaSillaDeRuedas = adaptaciones.contains(transportadorParaSillaDeRuedas)
 const property motorEsRuidoso = self.tieneAdaptacionSilenciosa()
 const property color = "Beige"
-var property vMax = self.vMaxAdaptaciones() + "km/h"
+var property vMax = self.vMaxAdaptaciones() 
 var property adaptaciones = #{} 
-var property autonomia = 200 + self.autonomiaConAdaptaciones() + "km"
+var property autonomia = 200 + self.autonomiaConAdaptaciones() 
 
 method tieneAdaptacionSilenciosa() {
   return adaptaciones.contains(cañoDeEscapeSilencioso) || adaptaciones.contains(tanqueExtraDeGas)
+}
+
+method adaptaciones() {
+  return adaptaciones
 }
 
 method capacidadTotal() {
@@ -27,7 +31,7 @@ method capacidadTotal() {
 
 method capacidadConAdaptaciones() {
   return if(adaptaciones.contains(cañoDeEscapeSilencioso)){
-    adaptaciones.copyWithout(cañoDeEscapeSilencioso)
+    adaptaciones.size() - 1
 }
 else{
     adaptaciones
@@ -44,9 +48,7 @@ method vMaxAdaptaciones() {
 }
 
 method autonomiaConAdaptaciones(){
-  return if (!adaptaciones.isEmpty()){
-    adaptaciones.sum({adaptacion => adaptacion.autonomia()}) 
-     }
+  return adaptaciones.sum{adaptacion => adaptacion.autonomia()}
     }
 }
 
@@ -90,11 +92,11 @@ object combiAdaptable{
 
 object deportivo {
   method autonomia() {
-    return 400 + "km"
+    return 400 
   }
 
   method vMax() {
-    return 230 + "km/h"
+    return 230 
   }
 
   method motorEsRuidoso() {
@@ -104,10 +106,10 @@ object deportivo {
 
 object urbano {
    method autonomia() {
-    return 1000 + "km"
+    return 1000 
   }
     method vMax() {
-    return 130 + "km/h"
+    return 130 
   }
 
   method motorEsRuidoso() {

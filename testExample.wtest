@@ -1,16 +1,31 @@
 import remiseria.*
 
 describe "group of tests for remises" {
+  test "reyDeCopas"{
+    const reyDeCopas = new Torino()
+     reyDeCopas.autonomia(300)
+     reyDeCopas.vMax(120)
+     assert.that(reyDeCopas.autonomia() == 300)
+  }
 
-test "torino"{
-   const torinoNegro = new Torino()
-  torinoNegro.color("negro")
-  assert.that(torinoNegro.color() == "negro")
-}
+  test "academia"{
+    const academia = new Torino()
+    academia.color("celeste")
+    academia.autonomia(250)
+    academia.vMax(110)
+    assert.that(academia.color() == "celeste" && academia.autonomia() == 250 && academia.vMax() == 110) 
+  }
 
-test "economico" {
-  const economicoAD = new Economico()
-  assert.equals(economicoAD.adaptaciones(), {0})
-}
+  test "cuervo" {
+    const cuervo = new Economico()
+    cuervo.adaptaciones(tanqueExtraDeGas)
+    cuervo.adaptaciones(transportadorParaSillaDeRuedas)
+    assert.that(cuervo.autonomia() == 380 && cuervo.transportaSillaDeRuedas())
+  }
 
+  test "xeneixe" {
+    const xeneixe = new Economico()
+    xeneixe.adaptaciones(cañoDeEscapeSilencioso)
+    assert.that(xeneixe.tieneAdaptacionSilenciosa())
+  }
 }
