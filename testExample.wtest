@@ -2,30 +2,68 @@ import remiseria.*
 
 describe "group of tests for remises" {
   test "reyDeCopas"{
-    const reyDeCopas = new Torino()
-     reyDeCopas.autonomia(300)
-     reyDeCopas.vMax(120)
-     assert.that(reyDeCopas.autonomia() == 300)
+    const reyDeCopas = new Torino(color = "rojo", autonomia = 300, vMax = 120)
+     assert.that(reyDeCopas.color() == "rojo")
+     assert.that(300 == reyDeCopas.autonomia())
+     assert.equals(4, reyDeCopas.capacidad())
+     assert.notThat(reyDeCopas.transportaSillaDeRuedas())
+     assert.that(reyDeCopas.motorEsRuidoso())
   }
 
   test "academia"{
-    const academia = new Torino()
-    academia.color("celeste")
-    academia.autonomia(250)
-    academia.vMax(110)
-    assert.that(academia.color() == "celeste" && academia.autonomia() == 250 && academia.vMax() == 110) 
+   const academia = new Torino(color = "celeste", autonomia = 250, vMax = 110)
+    assert.equals("celeste", academia.color())
+    assert.equals(250, academia.autonomia())
+    assert.equals(110, academia.vMax())
+    assert.equals(4, academia.capacidad())
+    assert.notThat(academia.transportaSillaDeRuedas())
+    assert.that(academia.motorEsRuidoso())
   }
 
   test "cuervo" {
-    const cuervo = new Economico()
-    cuervo.adaptaciones(tanqueExtraDeGas)
-    cuervo.adaptaciones(transportadorParaSillaDeRuedas)
-    assert.that(cuervo.autonomia() == 380 && cuervo.transportaSillaDeRuedas())
+     const cuervo = new Economico(adaptaciones = #{tanqueExtraDeGas, transportadorParaSillaDeRuedas})
+    assert.equals("Beige", cuervo.color())
+    assert.equals(380, cuervo.autonomia())
+    assert.equals(80, cuervo.vMax())
+    assert.equals(3, cuervo.capacidad())
+    assert.that(cuervo.transportaSillaDeRuedas())
+    assert.notThat(cuervo.motorEsRuidoso())
   }
 
-  test "xeneixe" {
-    const xeneixe = new Economico()
-    xeneixe.adaptaciones(cañoDeEscapeSilencioso)
-    assert.that(xeneixe.tieneAdaptacionSilenciosa())
+  test "xeneize" {
+   const xeneize = new Economico(adaptaciones = #{cañoDeEscapeSilencioso})
+    assert.equals("Beige", xeneize.color())
+    assert.equals(190, xeneize.autonomia())
+    assert.equals(115, xeneize.vMax())
+    assert.equals(5, xeneize.capacidad())
+    assert.notThat(xeneize.transportaSillaDeRuedas())
+    assert.notThat(xeneize.motorEsRuidoso())
   }
+
+  test "millonario"{
+    const millonario = new Economico()
+    assert.equals("Beige", millonario.color())
+    assert.equals(200, millonario.autonomia())
+    assert.equals(120, millonario.vMax())
+    assert.equals(5, millonario.capacidad())
+    assert.notThat(millonario.transportaSillaDeRuedas())
+    assert.that(millonario.motorEsRuidoso())
+  }
+
+    test "combi con motor urbano e interior accesible" {
+
+    combiAdaptable.interior(interiorAccesible)
+    combiAdaptable.motor(urbano)
+  
+    assert.equals("Celeste", combiAdaptable.color())
+    assert.equals(1000, combiAdaptable.autonomia())
+    assert.equals(130, combiAdaptable.vMax())
+    assert.equals(5, combiAdaptable.capacidad())
+    assert.that(combiAdaptable.transportaSillaDeRuedas())
+    assert.notThat(combiAdaptable.motorEsRuidoso())
+  }
+
+
+
+
 }
