@@ -3,8 +3,8 @@ class Torino{
  const property transportaSillaDeRuedas = false
  const property motorEsRuidoso = true
  var property color = "color"  
- var property vMax = 120
- var property autonomia =  200
+ var property vMax = 120 + "km/h"
+ var property autonomia =  200 + "km"
 
 }
 
@@ -13,9 +13,9 @@ var property capacidad = self.capacidadTotal()
 var property transportaSillaDeRuedas = adaptaciones.contains(transportadorParaSillaDeRuedas)
 const property motorEsRuidoso = self.tieneAdaptacionSilenciosa()
 const property color = "Beige"
-var property vMax = self.vMaxAdaptaciones()
+var property vMax = self.vMaxAdaptaciones() + "km/h"
 var property adaptaciones = #{} 
-var property autonomia = 200 + self.autonomiaConAdaptaciones()
+var property autonomia = 200 + self.autonomiaConAdaptaciones() + "km"
 
 method tieneAdaptacionSilenciosa() {
   return adaptaciones.contains(cañoDeEscapeSilencioso) || adaptaciones.contains(tanqueExtraDeGas)
@@ -75,4 +75,57 @@ object tanqueExtraDeGas{
    method autonomia() {
     return 200
   }
+}
+
+object combiAdaptable{
+  const property color = "Celeste" 
+  var property interior = interiorEspacioso
+  var property motor = deportivo
+  var property autonomia = motor.autonomia() 
+  var property motorEsRuidoso = motor.motorEsRuidoso() 
+  var property capacidad = interior.capacidad() 
+  var property transportaSillaDeRuedas = interior.transportaSillaDeRuedas()
+  
+}
+
+object deportivo {
+  method autonomia() {
+    return 400 + "km"
+  }
+
+  method vMax() {
+    return 230 + "km/h"
+  }
+
+  method motorEsRuidoso() {
+    return true
+  }
+}
+
+object urbano {
+   method autonomia() {
+    return 1000 + "km"
+  }
+    method vMax() {
+    return 130 + "km/h"
+  }
+
+  method motorEsRuidoso() {
+    return false
+  }
+}
+
+
+object interiorEspacioso {
+  method capacidad() {
+    7
+  }
+  method transportaSillaDeRuedas() = false
+}
+
+object interiorAccesible {
+  method capacidad() {
+    5
+  }
+  method transportaSillaDeRuedas() = true
 }
