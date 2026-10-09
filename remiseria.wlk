@@ -107,3 +107,36 @@ object interiorAccesible {
   
   method transportaSillaDeRuedas() = true
 }
+
+class Reserva{
+  var property cantidadPersonas = 0
+  var property distanciaARecorrer = 0
+  var property tiempoMaxDeViaje = 0 
+  var property coloresContraindicados = #{}
+  var property necesidadDeAutoSilencioso = true
+  var property necesidadDeSillaDeRuedas = true  
+  const property vPromedioDeViaje = (distanciaARecorrer / tiempoMaxDeViaje) + 10
+method capacidadAptaDeVehiculo(vehiculo) {
+  return vehiculo.capacidad() >= cantidadPersonas
+  }
+
+method autonomiaAptaDeVehiculo(vehiculo) {
+  return vehiculo.autonomia() >= distanciaARecorrer
+    }
+
+    method vMaxAptaDeVehiculo(vehiculo) {
+      vehiculo.vMax() >= vPromedioDeViaje
+    }
+
+    method colorAptoDeVehiculo(vehiculo) {
+      vehiculo.color().notIn(coloresContraindicados)
+    }
+
+    method vehiculoAptoParaSillaDeRuedas(vehiculo) {
+      return vehiculo.transportaSillaDeRuedas()
+    }
+
+    method vechiculoSilencioso(vehiculo) {
+      return vehiculo.motorEsRuidoso()
+    }
+}
